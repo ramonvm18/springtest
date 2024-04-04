@@ -15,7 +15,7 @@ public class DemoApplication {
 	@RequestMapping("/v2/")
 	@ResponseBody
 	String home() {
-		return "Hello World!";
+		return "test!";
 	}
 
 	public static void main(String[] args) {
