@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -14,9 +15,9 @@ public class ProfessorService implements IProfessorService {
     private int id = 1;
 
     @Override
-    public int criarProfessor(String nome) {
+    public int criarProfessor(ProfessorDto novoProfessor) {
 
-        professores.add(new ProfessorDto(id, nome));
+        professores.add(new ProfessorDto(id, novoProfessor.getNome(), novoProfessor.getCpf(), novoProfessor.getEmail()));
         return id++;
     }
 
@@ -27,22 +28,13 @@ public class ProfessorService implements IProfessorService {
 
     @Override
     public ProfessorDto buscarProfessor(@PathVariable("id") int id) {
-        Optional<ProfessorDto> professor = professores
-                .stream()
-                .filter(it -> it.getId() == id)
-                .findFirst();
-        return professor.orElse(null);
+        return professores.stream().filter(it -> it.getId() == id).findFirst().orElseThrow(NoSuchElementException::new);
     }
 
     @Override
-    public void atualizarProfessor(int id, String nome) {
-        Optional<ProfessorDto> professor = professores
-                .stream()
-                .filter(it -> it.getId() == id)
-                .findFirst();
-        if(professor.isPresent()) {
-            professores.remove(professor.get());
-            professores.add(new ProfessorDto(id, nome));
-        }
+    public void atualizarProfessor(int id, ProfessorDto pedido) {
+        final ProfessorDto professor = buscarProfessor(id);
+        professores.remove(professor);
+        professores.add(new ProfessorDto(professor.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail()));
     }
 }

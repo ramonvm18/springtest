@@ -32,14 +32,15 @@ public class ProfessorController {
 
     @PostMapping
     public int criarProfessor(@RequestBody @Valid ProfessorDto pedido) {
-        return servico.criarProfessor(pedido.getNome());
+        return servico.criarProfessor(pedido);
     }
 
     @PutMapping("/{id}")
     public void atualizarProfessor(@PathVariable("id") int id,
                                    @RequestBody ProfessorDto pedido
     ) {
-        servico.atualizarProfessor(id, pedido.getNome());
+        servico.atualizarProfessor(id, pedido);
+
     }
 
     @GetMapping("/{id}")
