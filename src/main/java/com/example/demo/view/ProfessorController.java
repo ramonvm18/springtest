@@ -7,48 +7,44 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.domain.dto.v1.ProfessorDto;
+import com.example.demo.service.IProfessorService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/professor")
 public class ProfessorController {
 
-    private final List<ProfessorDto> professores = new ArrayList<>();
-    private int id = 1;
+
+    private final IProfessorService servico;
+
+    @Autowired
+    public ProfessorController(IProfessorService servico) {
+        this.servico = servico;
+    }
 
     @GetMapping
     public List<ProfessorDto> lerProfessores() {
-        return professores;
+        return servico.listarProfessores();
     }
 
 
     @PostMapping
-    public int criarProfessor(@RequestBody ProfessorDto pedido) {
-        professores.add(new ProfessorDto(id, pedido.getNome()));
-        return id++;
+    public int criarProfessor(@RequestBody @Valid ProfessorDto pedido) {
+        return servico.criarProfessor(pedido.getNome());
     }
 
     @PutMapping("/{id}")
     public void atualizarProfessor(@PathVariable("id") int id,
                                    @RequestBody ProfessorDto pedido
     ) {
-        Optional< ProfessorDto> professor = professores
-                .stream()
-                .filter(it -> it.getId() == id)
-                .findFirst();
-        if(professor.isPresent()) {
-            professores.remove(professor.get());
-            professores.add(new ProfessorDto(id, pedido.getNome()));
-        }
+        servico.atualizarProfessor(id, pedido.getNome());
     }
 
     @GetMapping("/{id}")
     public ProfessorDto buscarProfessor(@PathVariable("id") int id) {
-        Optional<ProfessorDto> professor = professores
-                .stream()
-                .filter(it -> it.getId() == id)
-                .findFirst();
-        return professor.orElse(null);
+        return servico.buscarProfessor(id);
     }
 
 }
