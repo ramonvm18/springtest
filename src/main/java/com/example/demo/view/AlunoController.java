@@ -29,14 +29,14 @@ public class AlunoController {
 
     @PostMapping
     public int criarAluno(@RequestBody @Valid AlunoDto pedido) {
-        return servico.criarAluno(pedido.getNome());
+        return servico.criarAluno(pedido);
     }
 
     @PutMapping("/{id}")
     public void atualizarAluno(@PathVariable("id") int id,
                                    @RequestBody AlunoDto pedido
     ) {
-        servico.atualizarAluno(id, pedido.getNome());
+        servico.atualizarAluno(id, pedido);
     }
 
     @GetMapping("/{id}")
