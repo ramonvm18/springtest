@@ -17,7 +17,6 @@ import org.hibernate.validator.constraints.br.CPF;
 
 public class ProfessorDto {
 
-    @Positive
     private int id;
 
     @NotBlank
