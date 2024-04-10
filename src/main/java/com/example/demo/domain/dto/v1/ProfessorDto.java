@@ -17,9 +17,14 @@ import org.hibernate.validator.constraints.br.CPF;
 
 public class ProfessorDto {
 
-    @Positive
     private int id;
 
     @NotBlank
     private String nome;
+
+    @CPF
+    private String cpf;
+
+    @Email
+    private String email;
 }

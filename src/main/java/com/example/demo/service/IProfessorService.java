@@ -1,12 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.dto.v1.ProfessorDto;
+import com.example.demo.domain.dto.v1.exception.NotFoundException;
 
 import java.util.List;
 
 public interface IProfessorService {
-    int criarProfessor(String nome);
+    ProfessorDto criarProfessor(ProfessorDto pedido);
+
     List<ProfessorDto> listarProfessores();
-    ProfessorDto buscarProfessor(int id);
-    void atualizarProfessor(int id, String nome);
+
+    ProfessorDto buscarProfessor(int id) throws NotFoundException;
+
+    ProfessorDto atualizarProfessor(int id, ProfessorDto pedido);
+
 }

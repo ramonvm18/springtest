@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.domain.dto.v1.ProfessorDto;
+import com.example.demo.domain.dto.v1.exception.NotFoundException;
 import com.example.demo.service.IProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,26 +28,36 @@ public class ProfessorController {
     }
 
     @GetMapping
-    public List<ProfessorDto> lerProfessores() {
-        return servico.listarProfessores();
+    public ResponseEntity<List<ProfessorDto>> lerProfessores() {
+        return ResponseEntity.ok(servico.listarProfessores());
     }
 
 
     @PostMapping
-    public int criarProfessor(@RequestBody @Valid ProfessorDto pedido) {
-        return servico.criarProfessor(pedido.getNome());
+    public ResponseEntity<ProfessorDto> criarProfessor(
+            @RequestBody @Valid ProfessorDto pedido
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(servico.criarProfessor(pedido));
     }
 
     @PutMapping("/{id}")
-    public void atualizarProfessor(@PathVariable("id") int id,
-                                   @RequestBody ProfessorDto pedido
+    public ResponseEntity<ProfessorDto> atualizarProfessor(
+            @PathVariable("id") int id,
+            @RequestBody ProfessorDto pedido
     ) {
-        servico.atualizarProfessor(id, pedido.getNome());
+        final ProfessorDto p = servico.atualizarProfessor(id, pedido);
+
+        if (p == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(p);
     }
 
     @GetMapping("/{id}")
-    public ProfessorDto buscarProfessor(@PathVariable("id") int id) {
-        return servico.buscarProfessor(id);
+    public ResponseEntity<ProfessorDto> buscarProfessor(
+            @PathVariable("id") int id
+    ) throws NotFoundException {
+        return ResponseEntity.ok(servico.buscarProfessor(id));
     }
 
 }
