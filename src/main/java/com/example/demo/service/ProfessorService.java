@@ -3,12 +3,9 @@ package com.example.demo.service;
 import com.example.demo.domain.dto.v1.ProfessorDto;
 import com.example.demo.domain.dto.v1.exception.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+
 
 @Service
 public class ProfessorService implements IProfessorService {
