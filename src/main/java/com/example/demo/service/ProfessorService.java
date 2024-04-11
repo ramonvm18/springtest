@@ -3,12 +3,9 @@ package com.example.demo.service;
 import com.example.demo.domain.dto.v1.ProfessorDto;
 import com.example.demo.domain.dto.v1.exception.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+
 
 @Service
 public class ProfessorService implements IProfessorService {
@@ -51,5 +48,11 @@ public class ProfessorService implements IProfessorService {
         final ProfessorDto p = new ProfessorDto(professor.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail());
         professores.add(p);
         return p;
+    }
+
+    @Override
+    public void removerProfessor(int id) throws NotFoundException {
+        final ProfessorDto professor = buscarProfessor(id);
+        professores.remove(professor);
     }
 }

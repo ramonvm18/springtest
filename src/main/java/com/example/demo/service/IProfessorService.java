@@ -14,4 +14,7 @@ public interface IProfessorService {
 
     ProfessorDto atualizarProfessor(int id, ProfessorDto pedido);
 
+    void removerProfessor(int id) throws NotFoundException;
+
+
 }

@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.dto.v1.AlunoDto;
+import com.example.demo.domain.dto.v1.exception.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 @Service
 public class AlunoService implements IAlunoService {
@@ -14,10 +13,15 @@ public class AlunoService implements IAlunoService {
     private int id = 1;
 
     @Override
-    public int criarAluno(AlunoDto novoAluno) {
-
-        alunos.add(new AlunoDto(id, novoAluno.getNome(), novoAluno.getCpf(), novoAluno.getEmail()));
-        return id++;
+    public AlunoDto criarAluno(AlunoDto novoAluno) {
+        final AlunoDto p = new AlunoDto(
+                id++,
+                novoAluno.getNome(),
+                novoAluno.getCpf(),
+                novoAluno.getEmail()
+        );
+        alunos.add(p);
+        return p;
     }
 
     @Override
@@ -26,14 +30,29 @@ public class AlunoService implements IAlunoService {
     }
 
     @Override
-    public AlunoDto buscarAluno(@PathVariable("id") int id) {
-        return alunos.stream().filter(it -> it.getId() == id).findFirst().orElseThrow(NoSuchElementException::new);
+    public AlunoDto buscarAluno(int id) throws NotFoundException {
+        return alunos
+                .stream()
+                .filter(it -> it.getId()==id)
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(AlunoDto.class, String.valueOf(id)));
     }
 
     @Override
-    public void atualizarAluno(int id, AlunoDto pedido) {
-        final AlunoDto aluno = buscarAluno(id);
+    public AlunoDto atualizarAluno(int id, AlunoDto pedido) {
+        final AlunoDto aluno = alunos.stream().filter(it -> it.getId() == id).findFirst().orElse(null);
+        if (aluno == null) {
+            return null;
+        }
         alunos.remove(aluno);
-        alunos.add(new AlunoDto(aluno.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail()));
+        final AlunoDto p = new AlunoDto(aluno.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail());
+        alunos.add(p);
+        return p;
+    }
+
+    @Override
+    public void removerAluno(int id) throws NotFoundException {
+        final AlunoDto professor = buscarAluno(id);
+        alunos.remove(professor);
     }
 }

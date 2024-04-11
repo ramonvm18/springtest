@@ -1,11 +1,5 @@
 package com.example.demo.view;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
 import com.example.demo.domain.dto.v1.ProfessorDto;
 import com.example.demo.domain.dto.v1.exception.NotFoundException;
 import com.example.demo.service.IProfessorService;
@@ -59,5 +53,14 @@ public class ProfessorController {
     ) throws NotFoundException {
         return ResponseEntity.ok(servico.buscarProfessor(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerProfessor(
+            @PathVariable("id") int id
+    ) throws NotFoundException {
+        servico.removerProfessor(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
