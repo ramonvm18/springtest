@@ -52,4 +52,10 @@ public class ProfessorService implements IProfessorService {
         professores.add(p);
         return p;
     }
+
+    @Override
+    public void removerProfessor(int id) throws NotFoundException {
+        final ProfessorDto professor = buscarProfessor(id);
+        professores.remove(professor);
+    }
 }

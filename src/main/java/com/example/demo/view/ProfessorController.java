@@ -60,4 +60,13 @@ public class ProfessorController {
         return ResponseEntity.ok(servico.buscarProfessor(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerProfessor(
+            @PathVariable("id") int id
+    ) throws NotFoundException {
+        servico.removerProfessor(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
