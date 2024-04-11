@@ -55,4 +55,12 @@ public class AlunoController {
         return ResponseEntity.ok(servico.buscarAluno(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerAluno(
+            @PathVariable("id") int id
+    ) throws NotFoundException {
+        servico.removerAluno(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

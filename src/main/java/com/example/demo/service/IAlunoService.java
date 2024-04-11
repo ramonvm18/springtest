@@ -14,4 +14,6 @@ public interface IAlunoService {
     AlunoDto buscarAluno(int id) throws NotFoundException;
 
     AlunoDto atualizarAluno(int id, AlunoDto pedido);
+
+    void removerAluno(int id) throws NotFoundException;
 }
