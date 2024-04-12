@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.dto.v1.AlunoDto;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 
 import java.util.List;
 

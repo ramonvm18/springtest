@@ -1,7 +1,7 @@
 package com.example.demo.view;
 import java.util.List;
 import com.example.demo.domain.dto.v1.ProfessorDto;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 import com.example.demo.service.IProfessorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class ProfessorController {
     public ResponseEntity<ProfessorDto> atualizarProfessor(
             @PathVariable("id") int id,
             @RequestBody ProfessorDto pedido
-    ) {
+    ) throws NotFoundException {
         final ProfessorDto p = servico.atualizarProfessor(id, pedido);
 
         if (p == null) {
@@ -61,6 +61,5 @@ public class ProfessorController {
         servico.removerProfessor(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
