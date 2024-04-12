@@ -15,6 +15,10 @@ public class ProfessorMapper {
     }
 
     public static ProfessorDto toDto(Professor entity) {
-        return new ProfessorDto(entity.getId(), entity.getNome(), entity.getCpf(), entity.getEmail());
+        return new ProfessorDto(
+                entity.getId(),
+                entity.getNome(),
+                entity.getCpf(),
+                entity.getEmail());
     }
 }

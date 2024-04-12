@@ -60,7 +60,12 @@ public class ProfessorServiceBD implements IProfessorService {
 
     }
 
+    private Professor buscarProfessorPorId(int id) throws NotFoundException {
+        return repositorio.findById(id).orElseThrow(() -> new NotFoundException(Professor.class, String.valueOf(id)));
+    }
+
+    @Override
     public ProfessorDto buscarPorCpf(String cpf) throws NotFoundException {
-        return ProfessorMapper.toDto(repositorio.findByCpf(cpf).orElseThrow());
+        return ProfessorMapper.toDto(repositorio.findByCpf(cpf).orElseThrow(() -> new NotFoundException(Professor.class, cpf)));
     }
 }

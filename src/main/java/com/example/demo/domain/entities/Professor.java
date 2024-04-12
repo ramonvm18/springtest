@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +26,9 @@ public class Professor {
     private String cpf;
 
     private String email;
+
+    @CreationTimestamp
+    private Instant createdAt;
 
 
 
