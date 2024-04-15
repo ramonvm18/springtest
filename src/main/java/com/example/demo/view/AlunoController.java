@@ -39,7 +39,7 @@ public class AlunoController {
     public ResponseEntity<AlunoDto> atualizarAluno(
             @PathVariable("id") int id,
             @RequestBody AlunoDto pedido
-    ) {
+    ) throws NotFoundException {
         final AlunoDto p = servico.atualizarAluno(id, pedido);
 
         if (p == null) {
