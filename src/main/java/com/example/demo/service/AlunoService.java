@@ -53,8 +53,8 @@ public class AlunoService implements IAlunoService {
 
     @Override
     public void removerAluno(int id) throws NotFoundException {
-        final AlunoDto professor = buscarAluno(id);
-        alunos.remove(professor);
+        final AlunoDto aluno = buscarAluno(id);
+        alunos.remove(aluno);
     }
 
     @Override
