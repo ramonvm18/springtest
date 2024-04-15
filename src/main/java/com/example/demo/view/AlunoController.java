@@ -1,6 +1,6 @@
 package com.example.demo.view;
 import com.example.demo.domain.dto.v1.AlunoDto;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 import com.example.demo.service.IAlunoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class AlunoController {
     public ResponseEntity<AlunoDto> atualizarAluno(
             @PathVariable("id") int id,
             @RequestBody AlunoDto pedido
-    ) {
+    ) throws NotFoundException {
         final AlunoDto p = servico.atualizarAluno(id, pedido);
 
         if (p == null) {

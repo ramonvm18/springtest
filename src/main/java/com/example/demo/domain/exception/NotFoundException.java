@@ -1,4 +1,4 @@
-package com.example.demo.domain.dto.v1.exception;
+package com.example.demo.domain.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

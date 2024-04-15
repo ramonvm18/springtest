@@ -1,7 +1,7 @@
 package com.example.demo.view;
 
-import com.example.demo.domain.dto.v1.ErrorResponse;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.ErrorResponse;
+import com.example.demo.domain.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

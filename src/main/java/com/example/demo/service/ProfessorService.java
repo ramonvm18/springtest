@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.dto.v1.ProfessorDto;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +54,10 @@ public class ProfessorService implements IProfessorService {
     public void removerProfessor(int id) throws NotFoundException {
         final ProfessorDto professor = buscarProfessor(id);
         professores.remove(professor);
+    }
+
+    @Override
+    public ProfessorDto buscarPorCpf(String cpf) throws NotFoundException {
+        return null;
     }
 }

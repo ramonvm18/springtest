@@ -1,9 +1,9 @@
-package com.example.demo.domain.dto.v1;
+package com.example.demo.domain;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

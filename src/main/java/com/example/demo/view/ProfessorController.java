@@ -1,9 +1,10 @@
 package com.example.demo.view;
 import java.util.List;
 import com.example.demo.domain.dto.v1.ProfessorDto;
-import com.example.demo.domain.dto.v1.exception.NotFoundException;
+import com.example.demo.domain.exception.NotFoundException;
 import com.example.demo.service.IProfessorService;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProfessorController {
 
 
-    private final IProfessorService servico;
+    private IProfessorService servico;
 
     @Autowired
     public ProfessorController(IProfessorService servico) {
@@ -38,7 +39,7 @@ public class ProfessorController {
     public ResponseEntity<ProfessorDto> atualizarProfessor(
             @PathVariable("id") int id,
             @RequestBody ProfessorDto pedido
-    ) {
+    ) throws NotFoundException {
         final ProfessorDto p = servico.atualizarProfessor(id, pedido);
 
         if (p == null) {
@@ -62,5 +63,9 @@ public class ProfessorController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<ProfessorDto> buscarPorCpf(@PathParam("cpf") String cpf) throws NotFoundException {
+        return ResponseEntity.ok(servico.buscarPorCpf(cpf));
+    }
 
 }
