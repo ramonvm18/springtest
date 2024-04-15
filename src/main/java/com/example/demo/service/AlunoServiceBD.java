@@ -1,14 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.dto.v1.AlunoDto;
-import com.example.demo.domain.dto.v1.ProfessorDto;
 import com.example.demo.domain.entities.Aluno;
 import com.example.demo.domain.entities.Professor;
 import com.example.demo.domain.exception.NotFoundException;
 import com.example.demo.domain.mappers.AlunoMapper;
-import com.example.demo.domain.mappers.ProfessorMapper;
 import com.example.demo.repositories.AlunoRepository;
-import com.example.demo.repositories.ProfessorRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 

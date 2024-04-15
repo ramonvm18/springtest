@@ -5,7 +5,6 @@ import com.example.demo.domain.exception.NotFoundException;
 import com.example.demo.domain.mappers.ProfessorMapper;
 import com.example.demo.domain.dto.v1.ProfessorDto;
 import com.example.demo.repositories.ProfessorRepository;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
