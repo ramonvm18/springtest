@@ -18,7 +18,8 @@ public class AlunoService implements IAlunoService {
                 id++,
                 novoAluno.getNome(),
                 novoAluno.getCpf(),
-                novoAluno.getEmail()
+                novoAluno.getEmail(),
+                null
         );
         alunos.add(p);
         return p;
@@ -45,7 +46,7 @@ public class AlunoService implements IAlunoService {
             return null;
         }
         alunos.remove(aluno);
-        final AlunoDto p = new AlunoDto(aluno.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail());
+        final AlunoDto p = new AlunoDto(aluno.getId(), pedido.getNome(), pedido.getCpf(), pedido.getEmail(), null);
         alunos.add(p);
         return p;
     }
