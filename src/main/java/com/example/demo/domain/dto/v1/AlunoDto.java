@@ -2,6 +2,7 @@ package com.example.demo.domain.dto.v1;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +27,7 @@ public class AlunoDto {
 
     @Email
     private String email;
+
+    @Null
+    private String activity;
 }
